@@ -1,5 +1,5 @@
 GIT
-  remote: git@github.com:smellman/tle.git
+  remote: git://github.com/smellman/tle.git
   revision: c0f1091afedd2674938c6c69ea0e0917039eb373
   specs:
     tle (0.0.0)

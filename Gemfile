@@ -39,5 +39,5 @@ gem 'capistrano'
 
 gem 'pry-rails', :group => :development
 
-gem 'tle', :git => "git@github.com:smellman/tle.git"
+gem 'tle', :git => "git://github.com/smellman/tle.git"
 gem 'miriad'
