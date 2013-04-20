@@ -4,6 +4,7 @@ require "bundler/capistrano"
 load 'deploy/assets'
 
 set :application, "debris"
+#set :repository,  "/Users/btm/develop/hackathon/spaceappchallenge2013/dearmydebris/.git"
 set :repository,  "git://github.com/International-Space-Apps-Challenge-Tokyo/dearmydebris-server.git"
 set :scm, 'git'
 
@@ -33,6 +34,7 @@ role :db,  "157.7.139.169", :primary => true # This is where Rails migrations wi
 set :user, "debris"
 
 set :deploy_to, "/usr/local/apps/#{application}"
+set :deploy_via, :copy
 set :rails_env, "production"
 set :copy_exclude, [".git/*"]
 set :use_sudo, false
@@ -41,7 +43,7 @@ set :copy_cache, true
 set :normalize_asset_timestamps, false
 set :copy_remote_dir, "/home/#{user}/deploycache"
 
-#default_environment["RAILS_ENV"] = 'production'
+default_environment["RAILS_ENV"] = 'production'
 #default_environment["RBENV_ROOT"] = '$HOME/.rbenv'
 # default_environment["PATH"] = '/opt/local/bin:/usr/local/bin:/usr/bin:/bin:$HOME/.rbenv/shims:$HOME/.rbenv/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/pgsql-9.2/bin'
 
