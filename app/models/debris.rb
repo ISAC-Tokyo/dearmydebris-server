@@ -9,9 +9,9 @@ class Debris
 
   field :catalog_no_1, :type => Integer
   field :security_classification, :type => String
-  field :international_identification, :type => Integer
   field :epoch_year, :type => Integer
-  field :epoch, :type => String
+  field :nssdcid_1, :type => Integer
+  field :nssdcid_2, :type => String
   field :first_derivative_mean_motion, :type => Integer
   field :second_derivative_mean_motion , :type => Float
   field :bstar_mantissa, :type => Float
@@ -99,12 +99,12 @@ class Debris
         d.first_line = line.chomp
 
         d.catalog_no_1 = line.slice(2,5).to_i
-        d.id = d.catalog_no_1
         d.security_classification = line.slice(7,1)
-        d.international_identification = line.slice(9,2).to_i
-        epy = line.slice(11,3).to_i
+        epy = line.slice(9,2).to_i
         if epy < 57 then d.epoch_year = epy + 2000 else d.epoch_year = epy + 1900 end
-        d.epoch = line.slice(14,3)
+        d.epoch_year = epy
+        d.nssdcid_1 = line.slice(11,3).to_i
+        d.nssdcid_2 = line.slice(14,3)
         d.first_derivative_mean_motion = line.slice(18,2).to_i
         d.second_derivative_mean_motion = line.slice(20,12).to_f
         d.bstar_mantissa = line.slice(33,10).to_f
