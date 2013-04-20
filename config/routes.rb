@@ -1,5 +1,7 @@
 Dearmydebris::Application.routes.draw do
 
+  resources :oauth, :only => [ :index ]
+
   namespace :api, defaults: {format: 'json'} do
     namespace :v1 do
       get "debris/index"
