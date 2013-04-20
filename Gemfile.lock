@@ -1,9 +1,3 @@
-GIT
-  remote: git://github.com/smellman/tle.git
-  revision: c0f1091afedd2674938c6c69ea0e0917039eb373
-  specs:
-    tle (0.0.0)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -45,7 +39,6 @@ GEM
       net-sftp (>= 2.0.0)
       net-ssh (>= 2.0.14)
       net-ssh-gateway (>= 1.1.0)
-    coderay (1.0.9)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -56,23 +49,26 @@ GEM
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
+    faraday (0.8.7)
+      multipart-post (~> 1.1)
+    hashie (2.0.3)
     highline (1.6.18)
     hike (1.2.2)
+    httpauth (0.2.0)
     i18n (0.6.1)
     journey (1.0.4)
     jquery-rails (2.2.1)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
     json (1.7.7)
+    jwt (0.1.8)
+      multi_json (>= 1.5)
     kgio (2.8.0)
     mail (2.5.3)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
-    method_source (0.8.1)
     mime-types (1.22)
-    miriad (4.1.0.16)
-      narray (>= 0.5.9)
     mongo (1.8.5)
       bson (~> 1.8.5)
     mongo_mapper (0.12.0)
@@ -86,7 +82,7 @@ GEM
       tzinfo (~> 0.3.22)
     moped (1.4.5)
     multi_json (1.7.2)
-    narray (0.6.0.8)
+    multipart-post (1.2.0)
     net-scp (1.1.0)
       net-ssh (>= 2.6.5)
     net-sftp (2.1.1)
@@ -94,16 +90,24 @@ GEM
     net-ssh (2.6.7)
     net-ssh-gateway (1.2.0)
       net-ssh (>= 2.6.5)
+    oauth2 (0.8.1)
+      faraday (~> 0.8)
+      httpauth (~> 0.1)
+      jwt (~> 0.1.4)
+      multi_json (~> 1.0)
+      rack (~> 1.2)
+    omniauth (1.1.4)
+      hashie (>= 1.2, < 3)
+      rack
+    omniauth-facebook (1.4.1)
+      omniauth-oauth2 (~> 1.1.0)
+    omniauth-oauth2 (1.1.1)
+      oauth2 (~> 0.8.0)
+      omniauth (~> 1.0)
     origin (1.0.11)
     plucky (0.5.2)
       mongo (~> 1.5)
     polyglot (0.3.3)
-    pry (0.9.12)
-      coderay (~> 1.0.5)
-      method_source (~> 0.8)
-      slop (~> 3.4)
-    pry-rails (0.2.2)
-      pry (>= 0.9.10)
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -135,7 +139,6 @@ GEM
       railties (~> 3.2.0)
       sass (>= 3.1.10)
       tilt (~> 1.3)
-    slop (3.4.4)
     sprockets (2.2.2)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -163,12 +166,11 @@ DEPENDENCIES
   capistrano
   coffee-rails (~> 3.2.1)
   jquery-rails
-  miriad
   mongo_mapper
   mongoid
-  pry-rails
+  omniauth
+  omniauth-facebook
   rails (= 3.2.13)
   sass-rails (~> 3.2.3)
-  tle!
   uglifier (>= 1.0.3)
   unicorn
