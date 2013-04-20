@@ -5,6 +5,8 @@ Dearmydebris::Application.routes.draw do
       get "debris/index"
       get "debris/show"
       get "debris/edit"
+      get "debris/add_follower"
+      get "debris/remove_follower"
     end
   end
 
