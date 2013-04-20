@@ -1,4 +1,6 @@
 class Api::V1::DebrisController < ApplicationController
+
+  after_filter :set_access_control_headers
   respond_to :json
   def index
      res_geojson =
@@ -24,5 +26,11 @@ class Api::V1::DebrisController < ApplicationController
   end
 
   def edit
+  end
+
+  private
+  def set_access_control_headers
+    headers['Access-Control-Allow-Origin'] = '*'
+    headers['Access-Control-Request-Method'] = '*'
   end
 end
