@@ -1,6 +1,11 @@
 class Debris
   include Mongoid::Document
-  field :catalog_no_1, :type => String
+
+  field :name, :type => String
+  field :first_line, :type => String
+  field :second_line, :type => String
+
+  field :catalog_no_1, :type => Integer
   field :security_classification, :type => String
   field :international_identification, :type => Integer
   field :epoch_year, :type => Integer
