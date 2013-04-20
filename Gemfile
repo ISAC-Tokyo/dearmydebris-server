@@ -36,3 +36,8 @@ gem 'capistrano'
 
 # To use debugger
 # gem 'debugger'
+
+gem 'pry-rails', :group => :development
+
+gem 'tle', :git => "git@github.com:smellman/tle.git"
+gem 'miriad'
