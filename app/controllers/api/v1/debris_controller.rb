@@ -18,7 +18,8 @@ class Api::V1::DebrisController < ApplicationController
           :follower => [ "osoken", "smellman" ]
         }
       },
-        {:type => "Feature",
+      {
+        :type => "Feature",
         :geometry => {
           :type => "Point",
           :coordinates => [ 139.67778669128418, 35.66203375685752, 120000 ]
@@ -37,6 +38,22 @@ class Api::V1::DebrisController < ApplicationController
   end
 
   def edit
+  end
+
+  def add_follower
+    id, follower = params[ :id ], params[ :follower ]
+    debris = Debris.find(id)
+
+    debris.follower.push follower
+    debris.save
+  end
+
+  def remove_follower
+    id, follower = params[ :id ], params[ :name ]
+    debris = Debris.find(id)
+
+    debris.follower.delete_if{ |x| x == follower }
+    debris.save
   end
 
   private
