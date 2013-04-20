@@ -21,7 +21,7 @@ class Api::V1::DebrisController < ApplicationController
         {:type => "Feature",
         :geometry => {
           :type => "Point",
-          :coordinates => [ 139.67768669128418, 35.66193375685752, 120000 ]
+          :coordinates => [ 139.67778669128418, 35.66203375685752, 120000 ]
         },
         :properties => {
           :name => "VANGUARD 1",
