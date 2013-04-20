@@ -1,4 +1,14 @@
 Dearmydebris::Application.routes.draw do
+
+  namespace :api, defaults: {format: 'json'} do
+    namespace :v1 do
+      get "debris/index"
+      get "debris/show"
+      get "debris/edit"
+    end
+  end
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
