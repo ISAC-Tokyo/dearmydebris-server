@@ -10,12 +10,23 @@ class Api::V1::DebrisController < ApplicationController
         :type => "Feature",
         :geometry => {
           :type => "Point",
-          :coordinates => [ 10, 50, 10000 ]
+          :coordinates => [ 139.67768669128418, 35.66193375685752, 100000 ]
         },
         :properties => {
-          :name => "VANGUARD",
-          :id => "hogehoge",
+          :name => "VANGUARD 1",
+          :id => "1",
           :follower => [ "osoken", "smellman" ]
+        }
+      },
+        {:type => "Feature",
+        :geometry => {
+          :type => "Point",
+          :coordinates => [ 139.67768669128418, 35.66193375685752, 120000 ]
+        },
+        :properties => {
+          :name => "VANGUARD 1",
+          :id => "2",
+          :follower => [ "tacke-yuuki","tree4-s","jumbo","taka.aom" ]
         }
       }]
     }.as_json
