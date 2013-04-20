@@ -25,4 +25,5 @@ class Debris
   field :check_sum_2, :type => Integer
 
   field :follower, :type => Array
+  field :category, :type => String
 end
