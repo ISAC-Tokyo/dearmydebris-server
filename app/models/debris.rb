@@ -1,4 +1,6 @@
 require 'tle'
+require 'nokogiri'
+require 'open-uri'
 
 class Debris
   include Mongoid::Document
@@ -47,7 +49,7 @@ class Debris
     gmst = time.gmst()
     lst = gmst*15
     f =  0.00335277945
-    a =  6378.135 
+    a =  6378.135
     r = Math.sqrt(xkm * xkm + ykm * ykm)
     lng = Math.atan2(ykm, xkm) / rad - lst
     if lng > 360
@@ -67,7 +69,7 @@ class Debris
       sin_lat = Math.sin(tmp_lat)
       c = 1 / Math.sqrt(1 - e2 * sin_lat * sin_lat)
       lat = Math.atan2(zkm + a * c * e2 * (Math.sin(tmp_lat)), r);
-    
+
     while ((lat - tmp_lat).abs > 0.0001) do
       tmp_lat = lat
       sin_lat = Math.sin(tmp_lat)
@@ -82,7 +84,7 @@ class Debris
       :altitude => alt,
       :velocity => v
     }
-    
+
   end
 
   def self.load_from_file(file_path)
@@ -139,6 +141,31 @@ class Debris
     return mantissa.to_f * (10 ** exponent.to_i)
   end
 
+  def cid
+    return "" if self.nssdcid_1.nil?
+    tmp_id = "%03d" % self.nssdcid_1
+    "#{self.epoch_year}-#{tmp_id}A"
+  end
 
+  def self.crawler
+    Debris.all.map(&:cid).uniq.each do |x|
+      international_identification = "#{x}"
+      page = open("http://nssdc.gsfc.nasa.gov/nmc/spacecraftDisplay.do?id=#{international_identification}")
+      doc = Nokogiri::HTML(page.read, nil, 'UTF-8')
 
+      doc_item_href = doc.search('//div[@class="capleft"]')
+      if doc_item_href != nil
+        doc_item_href.search("a").each do |alink|
+          puts alink.attribute("href")
+        end
+      end
+
+      doc_item_p = doc.search('//div[@class="urone"]')
+      if doc_item_p != nil
+        doc_item_p.search('p').each do |content|
+          puts content.text
+        end
+      end
+    end
+  end
 end
