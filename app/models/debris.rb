@@ -102,9 +102,8 @@ class Debris
         d.security_classification = line.slice(7,1)
         epy = line.slice(9,2).to_i
         if epy < 57 then d.epoch_year = epy + 2000 else d.epoch_year = epy + 1900 end
-        d.epoch_year = epy
         d.nssdcid_1 = line.slice(11,3).to_i
-        d.nssdcid_2 = line.slice(14,3)
+        d.nssdcid_2 = line.slice(14,3).strip
         d.first_derivative_mean_motion = line.slice(18,2).to_i
         d.second_derivative_mean_motion = line.slice(20,12).to_f
         d.bstar_mantissa = line.slice(33,10).to_f
