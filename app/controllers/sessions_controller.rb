@@ -1,16 +1,15 @@
 class SessionsController < ApplicationController
   def callback
-    #raise request.env["omniaouth.auth"].to_yaml
 
     auth = request.env["omniauth.auth"]
-    user = User.find_by_provider_and_uid["provider"].auth["uid"])
+    user = User.find_by_provider_and_uid(["provider"].auth["uid"])
 
     if user
      session[:user_id] = user.id
      redirect_to root_url, :notice => "Login Success."
     else
      User.create_with_omniauth(auth)
-     redirect_to root_url, :notice => "#{auth["info"]["name"]}さんの#{auth["provider"]}アカウントと接続しました"
+     redirect_to root_url, :notice => "#{auth["info"]["name"]}s #{auth["provider"]} account connected"
     end
   end
 

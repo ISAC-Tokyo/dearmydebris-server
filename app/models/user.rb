@@ -1,4 +1,4 @@
-class User < ActiveRecord::Base
+class User
   include Mongoid::Document
   field :privider, type: String
   field :uid, type: String
