@@ -18,6 +18,22 @@ class Api::V1::DebrisController < ApplicationController
   def edit
   end
 
+  def add_follower
+    id, follower = params[ :id ], params[ :follower ]
+    debris = Debris.find(id)
+
+    debris.follower.push follower
+    debris.save
+  end
+
+  def remove_follower
+    id, follower = params[ :id ], params[ :name ]
+    debris = Debris.find(id)
+
+    debris.follower.delete_if{ |x| x == follower }
+    debris.save
+  end
+
   private
   def set_access_control_headers
     headers['Access-Control-Allow-Origin'] = '*'
