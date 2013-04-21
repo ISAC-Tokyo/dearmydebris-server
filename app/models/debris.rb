@@ -100,9 +100,20 @@ class Debris
         :name => self.name,
         :id => self._id,
         :follower => ["osoken", "smellman"],
-        :nssdc_catalog => nssdc
+        :nssdc_catalog => nssdc,
+        :category => get_category
       }
     }        
+  end
+
+  def get_category
+    if self.name.include?("R/B")
+      return "RB"
+    elsif self.name.include?("DEB")
+      return "DEB"
+    else
+      return nil
+    end
   end
 
   def self.load_from_file(file_path)

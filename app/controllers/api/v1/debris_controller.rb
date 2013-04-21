@@ -3,7 +3,7 @@ class Api::V1::DebrisController < ApplicationController
   after_filter :set_access_control_headers
   respond_to :json
   def index
-    debris = Debris.limit(100)
+    debris = Debris.limit(1000)
     res_geojson = 
       {
       :type => "FeatureCollection",
