@@ -153,18 +153,22 @@ class Debris
       page = open("http://nssdc.gsfc.nasa.gov/nmc/spacecraftDisplay.do?id=#{international_identification}")
       doc = Nokogiri::HTML(page.read, nil, 'UTF-8')
 
-      doc_item_href = doc.search('//div[@class="capleft"]')
-      if doc_item_href != nil
-        doc_item_href.search("a").each do |alink|
-          puts alink.attribute("href")
-        end
-      end
-
       doc_item_p = doc.search('//div[@class="urone"]')
-      if doc_item_p != nil
+      unless doc_item_p.nil?
+        n = NssdcCatalog.new
+        n.cid = x
         doc_item_p.search('p').each do |content|
-          puts content.text
+          n.description = content.text
         end
+        next if n.description.blank?
+        n.description = n.description.strip unless n.description.blank?
+        doc_item_href = doc.search('//div[@class="capleft"]')
+        unless doc_item_href.nil?
+          doc_item_href.search("a").each do |alink|
+            n.img = alink.attribute("href")
+          end
+        end
+        n.save
       end
     end
   end
