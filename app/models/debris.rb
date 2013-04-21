@@ -85,6 +85,22 @@ class Debris
     
   end
 
+  def get_hash
+    geographic = self.geographic(DateTime.now)
+    return {
+      :type => "Feature",
+      :geometry => {
+        :type => "Point",
+        :coordinates => [geographic[:longitude], geographic[:latitude], geographic[:altitude]]
+      },
+      :properties => {
+        :name => self.name,
+        :id => self._id,
+        :follower => ["osoken", "smellman"]
+      }
+    }        
+  end
+
   def self.load_from_file(file_path)
 
     f = open(file_path)
