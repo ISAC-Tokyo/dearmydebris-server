@@ -1,5 +1,9 @@
 Dearmydebris::Application.routes.draw do
 
+  get "home/dearmydebris2d"
+
+  get "home/dearmydebris3d"
+
   namespace :api, defaults: {format: 'json'} do
     namespace :v1 do
       get "debris/index"

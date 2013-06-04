@@ -1,0 +1,62 @@
+#balloon_window {
+	text-align:center;
+
+}
+
+
+.follower{
+	float:left;
+	width: 100px;
+}
+
+.follower img{
+	width:80px;
+}
+
+#explain_window{
+display: none;
+  bottom: 30px;
+  left: 30px;
+  width: 30%;
+  height: 55%;
+  /*display: none;
+  /*
+  オーバーレイの位置を絶対位置にします。
+  * この例では画面全体に対してなので、absoluteでも問題ないです。
+  * 特定のパーツにかける場合はfixedにしないとスクロールに対応できません。
+  */
+ border-radius: 10px; 
+  position: fixed;
+  background-color: #FFFFFF;
+  /* 透明度を指定します。 
+  filter: alpha(opacity=20);
+  opacity: 0.4;	*/
+}
+
+#debri_name{
+	text-align:center;
+	width:100%;
+	height:20%
+}
+
+#debri_followers{
+	width:100%;
+	height:30%
+}
+
+#descript{
+	width:100%;
+	height:20%
+}
+#debri_follow_btn{
+	text-align:center;
+	width:100%;
+	height:20%
+}
+#follow_btn{
+	float:left
+}
+
+#center_btn{
+		text-align:center;
+}

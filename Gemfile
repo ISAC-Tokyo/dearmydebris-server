@@ -43,3 +43,6 @@ gem 'tle', :git => "git://github.com/smellman/tle.git"
 gem 'miriad'
 
 gem 'nokogiri'
+
+gem 'haml'
+gem 'haml-rails'
