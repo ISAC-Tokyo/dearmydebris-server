@@ -25,6 +25,17 @@ class Api::V1::DebrisController < ApplicationController
   def edit
   end
 
+  def catalogs
+    nssdc_catalog = NssdcCatalog.where(cid: params[:cid]).first
+    debrises = nssdc_catalog.debrises
+    res_geojson =
+      {
+      :type => "FeatureCollection",
+      :feature => debrises.map(&:get_hash)
+    }.as_json
+    respond_with res_geojson
+  end
+
   def add_follower
     id, follower = params[ :id ], params[ :follower ]
     debris = Debris.find(id)

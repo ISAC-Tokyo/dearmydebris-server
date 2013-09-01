@@ -8,6 +8,7 @@ Dearmydebris::Application.routes.draw do
     namespace :v1 do
       get "debris/index"
       get "debris/show/:id" => "debris#show"
+      get "debris/catalogs/:cid" => "debris#catalogs"
       get "debris/add_follower"
       get "debris/remove_follower"
     end
