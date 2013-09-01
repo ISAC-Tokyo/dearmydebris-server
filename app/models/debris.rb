@@ -1,6 +1,7 @@
 require 'tle'
 require 'nokogiri'
 require 'open-uri'
+require 'scanf'
 
 class Debris
   include Mongoid::Document
@@ -35,6 +36,8 @@ class Debris
 
   field :follower, :type => Array
   field :category, :type => String
+
+  belongs_to :nssdc_catalog, class_name: "NssdcCatalog"
 
   def geographic(time)
     satrec = Tle::Elements.new(self.first_line, self.second_line, Tle::WGS72)
@@ -89,7 +92,7 @@ class Debris
 
   def get_hash
     geographic = self.geographic(DateTime.now)
-    nssdc = NssdcCatalog.where(:cid => self.cid).first
+    #nssdc = NssdcCatalog.where(:cid => self.cid).first
     return {
       :type => "Feature",
       :geometry => {
@@ -100,10 +103,10 @@ class Debris
         :name => self.name,
         :id => self._id,
         :follower => ["osoken", "smellman"],
-        :nssdc_catalog => nssdc,
+        :nssdc_catalog => self.nssdc_catalog,
         :category => get_category
       }
-    }        
+    }
   end
 
   def get_category
@@ -176,12 +179,16 @@ class Debris
     "#{self.epoch_year}-#{tmp_id}A"
   end
 
+  def self.get_same_cid(cid)
+    epoch_year, nssdcid_1 = cid.scanf("%4d-%03dA")
+    return self.where(epoch_year: epoch_year).where(nssdcid_1: nssdcid_1)
+  end
+
   def self.crawler
     Debris.all.map(&:cid).uniq.each do |x|
       international_identification = "#{x}"
       page = open("http://nssdc.gsfc.nasa.gov/nmc/spacecraftDisplay.do?id=#{international_identification}")
       doc = Nokogiri::HTML(page.read, nil, 'UTF-8')
-
       doc_item_p = doc.search('//div[@class="urone"]')
       unless doc_item_p.nil?
         n = NssdcCatalog.new
@@ -198,6 +205,10 @@ class Debris
           end
         end
         n.save
+        Debris.get_same_cid(x).each do |d|
+          d.nssdc_catalog = n
+          d.save
+        end
       end
     end
   end

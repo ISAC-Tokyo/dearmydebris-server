@@ -7,8 +7,7 @@ Dearmydebris::Application.routes.draw do
   namespace :api, defaults: {format: 'json'} do
     namespace :v1 do
       get "debris/index"
-      get "debris/show"
-      get "debris/edit"
+      get "debris/show/:id" => "debris#show"
       get "debris/add_follower"
       get "debris/remove_follower"
     end
