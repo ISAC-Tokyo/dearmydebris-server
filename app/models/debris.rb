@@ -95,13 +95,13 @@ class Debris
   end
 
   def get_hash
-    geographic = self.geographic(DateTime.now)
+    #geographic = self.geographic(DateTime.now)
     #nssdc = NssdcCatalog.where(:cid => self.cid).first
     return {
       :type => "Feature",
       :geometry => {
         :type => "Point",
-        :coordinates => [geographic[:longitude], geographic[:latitude], geographic[:altitude]]
+        :coordinates => [self.longitude, self.latitude, self.altitude] #[geographic[:longitude], geographic[:latitude], geographic[:altitude]]
       },
       :properties => {
         :name => self.name,
