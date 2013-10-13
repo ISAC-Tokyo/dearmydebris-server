@@ -11,6 +11,7 @@ Dearmydebris::Application.routes.draw do
       get "debris/catalogs/:cid" => "debris#catalogs"
       get "debris/add_follower"
       get "debris/remove_follower"
+      get "debris/all"
     end
   end
 
