@@ -39,6 +39,7 @@ class Debris
 
   field :latitude, :type => Float
   field :longitude, :type => Float
+  field :altitude, :type => Float
 
   belongs_to :nssdc_catalog, class_name: "NssdcCatalog"
 
@@ -116,6 +117,11 @@ class Debris
     geographic = self.geographic(DateTime.now)
     self.latitude = geographic[:latitude]
     self.longitude = geographic[:longitude]
+    if geographic[:altitude] < 0
+      self.altitude = 0
+    else
+      self.altitude = geographic[:altitude]
+    end
   end
 
   def get_category
