@@ -37,6 +37,9 @@ class Debris
   field :follower, :type => Array
   field :category, :type => String
 
+  field :latitude, :type => Float
+  field :longitude, :type => Float
+
   belongs_to :nssdc_catalog, class_name: "NssdcCatalog"
 
   def geographic(time)
@@ -107,6 +110,12 @@ class Debris
         :category => get_category
       }
     }
+  end
+
+  def set_latlon
+    geographic = self.geographic(DateTime.now)
+    self.latitude = geographic[:latitude]
+    self.longitude = geographic[:longitude]
   end
 
   def get_category
@@ -182,6 +191,13 @@ class Debris
   def self.get_same_cid(cid)
     epoch_year, nssdcid_1 = cid.scanf("%4d-%03dA")
     return self.where(epoch_year: epoch_year).where(nssdcid_1: nssdcid_1)
+  end
+
+  def self.update_latlon
+    Debris.all.each do |x|
+      x.set_latlon
+      x.save
+    end
   end
 
   def self.crawler
