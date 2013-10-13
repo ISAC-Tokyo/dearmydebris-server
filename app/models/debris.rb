@@ -108,7 +108,9 @@ class Debris
         :id => self._id,
         :follower => ["osoken", "smellman"],
         :nssdc_catalog => self.nssdc_catalog,
-        :category => get_category
+        :category => get_category,
+        :first_line => self.first_line,
+        :second_line => self.second_line
       }
     }
   end

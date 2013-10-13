@@ -12,6 +12,16 @@ class Api::V1::DebrisController < ApplicationController
     respond_with res_geojson
   end
 
+  def all
+    debris = Debris.all
+    res_geojson = 
+      {
+      :type => "FeatureCollection",
+      :feature => debris.map(&:get_hash)
+    }.as_json
+    respond_with res_geojson
+  end
+
   def show
     debris = Debris.find(params[:id])
     res_geojson =
