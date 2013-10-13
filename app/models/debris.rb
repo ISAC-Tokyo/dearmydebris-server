@@ -234,4 +234,9 @@ class Debris
       end
     end
   end
+
+  def self.collect_debris
+
+  end
+
 end
