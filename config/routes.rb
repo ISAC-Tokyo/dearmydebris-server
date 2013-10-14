@@ -7,11 +7,15 @@ Dearmydebris::Application.routes.draw do
   namespace :api, defaults: {format: 'json'} do
     namespace :v1 do
       get "debris/index"
+      get "debris/all"
       get "debris/show/:id" => "debris#show"
       get "debris/catalogs/:cid" => "debris#catalogs"
-      get "debris/add_follower"
-      get "debris/remove_follower"
-      get "debris/all"
+      get "debris/show_all_user"
+      get "debris/show_user/:facebook_id" => "debris#show_user"
+      post "debris/add_follower"
+      post "debris/remove_follower"
+      post "debris/follow_debris"
+      post "debris/unfollow_debris"
     end
   end
 

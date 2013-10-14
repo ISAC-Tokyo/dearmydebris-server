@@ -4,7 +4,7 @@ class Api::V1::DebrisController < ApplicationController
   respond_to :json
   def index
     debris = Debris.limit(1000)
-    res_geojson = 
+    res_geojson =
       {
       :type => "FeatureCollection",
       :feature => debris.map(&:get_hash)
@@ -14,7 +14,7 @@ class Api::V1::DebrisController < ApplicationController
 
   def all
     debris = Debris.all
-    res_geojson = 
+    res_geojson =
       {
       :type => "FeatureCollection",
       :feature => debris.map(&:get_hash)
@@ -46,20 +46,50 @@ class Api::V1::DebrisController < ApplicationController
     respond_with res_geojson
   end
 
-  def add_follower
-    id, follower = params[ :id ], params[ :follower ]
-    debris = Debris.find(id)
+  def show_all_user
+    user = User.all
+    res_userjson =
+      {
+      :type => "FeatureCollection",
+      :feature => user.map(&:get_hash)
+    }.as_json
+    respond_with res_userjson
+  end
 
-    debris.follower.push follower
+  def show_user
+    user = User.where(facebook_id: params[:facebook_id]).first
+    res_userjson =
+      {
+      :type => "FeatureCollection",
+      :feature => user.get_hash
+    }.as_json
+    respond_with res_userjson
+  end
+
+  def add_follower
+    debris = Debris.find(params[:id])
+    follower = User.where(facebook_id: params[:facebook_id]).first
+    debris.users.push follower
     debris.save
   end
 
   def remove_follower
-    id, follower = params[ :id ], params[ :name ]
-    debris = Debris.find(id)
+    debris = Debris.find(params[:id])
+    follower = User.where(facebook_id: params[:facebook_id]).first
+    debris.users.delete follower
+  end
 
-    debris.follower.delete_if{ |x| x == follower }
-    debris.save
+  def follow_debris
+    debris = Debris.find(params[:id])
+    follower = User.where(facebook_id: params[:facebook_id]).first
+    follower.debrises.push debris
+    follower.save
+  end
+
+  def unfollow_debris
+    debris = Debris.find(params[:id])
+    follower = User.where(facebook_id: params[:facebook_id]).first
+    follower.debrises.delete debris
   end
 
   private
