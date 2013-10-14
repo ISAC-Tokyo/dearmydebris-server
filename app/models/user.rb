@@ -1,5 +1,6 @@
-class Users
+class User
   include Mongoid::Document
+
   field :facebook_id, :type => Integer
   field :user_name, :type => String
   field :icon, :type => String

@@ -42,7 +42,7 @@ class Debris
   field :altitude, :type => Float
 
   belongs_to :nssdc_catalog, class_name: "NssdcCatalog"
-  has_and_belongs_to_many :users, class_name: "Users"
+  has_and_belongs_to_many :users, class_name: "User"
 
   def geographic(time)
     satrec = Tle::Elements.new(self.first_line, self.second_line, Tle::WGS72)
@@ -107,7 +107,8 @@ class Debris
       :properties => {
         :name => self.name,
         :id => self._id,
-        :follower => ["osoken", "smellman"],
+        # :follower => ["osoken", "smellman"],
+        :users => self.users,
         :nssdc_catalog => self.nssdc_catalog,
         :category => get_category,
         :first_line => self.first_line,
