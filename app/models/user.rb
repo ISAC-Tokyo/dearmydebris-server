@@ -6,7 +6,7 @@ class User
   field :icon, :type => String
   field :oath_token, :type => String
 
-  has_many :debrises, class_name: "Debris"
+  has_and_belongs_to_many :debrises, class_name: "Debris"
 
   def get_hash
     return {
