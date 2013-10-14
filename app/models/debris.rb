@@ -110,7 +110,7 @@ class Debris
         # :follower => ["osoken", "smellman"],
         :users => self.users,
         :nssdc_catalog => self.nssdc_catalog,
-        # :category => get_category,
+        :category => get_category,
         :first_line => self.first_line,
         :second_line => self.second_line,
         :epoch_year => self.epoch_year.to_s
