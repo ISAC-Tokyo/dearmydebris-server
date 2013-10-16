@@ -12,6 +12,8 @@ Dearmydebris::Application.routes.draw do
       get "debris/catalogs/:cid" => "debris#catalogs"
       get "debris/show_all_user"
       get "debris/show_user/:facebook_id" => "debris#show_user"
+      post "debris/add_user"
+      post "debris/remove_user"
       post "debris/add_follower"
       post "debris/remove_follower"
       post "debris/follow_debris"

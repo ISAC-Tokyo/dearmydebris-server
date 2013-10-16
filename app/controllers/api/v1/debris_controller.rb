@@ -66,6 +66,16 @@ class Api::V1::DebrisController < ApplicationController
     respond_with res_userjson
   end
 
+  def add_user
+    user = User.create(facebook_id: params[:facebook_id], user_name: params[:user_name], icon_url: params[:icon_url], oath_token: params[:oath_token])
+    user.save
+  end
+
+  def remove_user
+    User.where(facebook_id: params[:facebook_id]).delete
+  end
+
+
   def add_follower
     debris = Debris.find(params[:id])
     follower = User.where(facebook_id: params[:facebook_id]).first
